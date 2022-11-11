@@ -4,11 +4,11 @@ import { getInjectedServicesFromString } from './utils';
 abstract class FileProcessor {
     /**
      * @return a single letter denoting the type
-     * s - service not in focused path
-     * S - service in focused path
-     * D - directive in focused path
-     * C - component in focused path
-     * . - unprocessed file (components/directives outside focused path and other unsupported files)
+     * s - service not in scope
+     * S - service in scope
+     * D - directive in scope
+     * C - component in scope
+     * . - unprocessed file (components/directives outside of scope and other unsupported files)
      */
     abstract get type(): string;
 
