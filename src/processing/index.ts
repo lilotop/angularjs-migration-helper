@@ -6,18 +6,9 @@ import { SimpleProcessor } from './implementations/simpleProcessor';
 import { NullProcessor } from './implementations/nullProcessor';
 import { UiObjProcessor } from './implementations/uiObjProcessor';
 
-function createFileProcessor(
-    filePath: string,
-    partOfFocus: boolean
-): FileProcessor {
-    // construct the partial metadata object
-    const fileInfo: FileInfo = {
-        filePath,
-        partOfFocus,
-    };
-
+function createFileProcessor(fileInfo: FileInfo): FileProcessor {
     // read the file's content
-    const buffer = fs.readFileSync(filePath);
+    const buffer = fs.readFileSync(fileInfo.filePath);
     let fileContent = buffer.toString();
 
     // remove all comments to avoid wrong counts
@@ -58,7 +49,7 @@ function createFileProcessor(
     }
 
     // component, directive or controller (.ctrl.js file) in scope
-    if (fileInfo.partOfFocus) {
+    if (fileInfo.inScope) {
         res = fileContent.match(
             MATCH_PATTERNS.DRV_OR_COMP_WITH_NAMED_CONTROLLER
         );

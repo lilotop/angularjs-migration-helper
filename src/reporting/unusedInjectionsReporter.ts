@@ -11,7 +11,7 @@ type UnusedInjectionsRecord = {
 class UnusedInjectionsReporter implements Reporter {
     private filesWithUnusedInjections: UnusedInjectionsRecord[] = [];
     add(data: Metadata): void {
-        if (data.partOfFocus) {
+        if (data.inScope) {
             let unusedInjections = [];
             for (const service of data.services) {
                 if (service.count === 1) {

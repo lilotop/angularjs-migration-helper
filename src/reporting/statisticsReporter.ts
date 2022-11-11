@@ -21,7 +21,7 @@ class StatisticsReporter implements Reporter {
         this.allMetadata[data.name] = data;
         switch (data.fileType) {
             case 'service':
-                if (data.partOfFocus) {
+                if (data.inScope) {
                     this.processServices(data);
                 }
                 break;
@@ -50,7 +50,7 @@ class StatisticsReporter implements Reporter {
                 this.servicesInjectionsAndMentions[service.name] = record;
             }
         }
-        if (data.partOfFocus) {
+        if (data.inScope) {
             this.dependenciesPerScopedFile[data.name] = new StatisticsRecord(
                 data.name,
                 injectionsInFile,
@@ -65,10 +65,10 @@ class StatisticsReporter implements Reporter {
             let record = this.servicesInjectionsAndMentions[recordName];
             let metadata = this.allMetadata[record.name];
 
-            let partOfFocus = metadata ? metadata.partOfFocus : 'n/a';
+            let inScope = metadata ? metadata.inScope : 'n/a';
             let filePath = metadata ? metadata.filePath : 'n/a';
 
-            let line = `${record.name},${record.injections},${record.mentions},${partOfFocus},${filePath}${EOL}`;
+            let line = `${record.name},${record.injections},${record.mentions},${inScope},${filePath}${EOL}`;
             servicesUsage += line;
         }
         fs.writeFileSync('services_usage.csv', servicesUsage);

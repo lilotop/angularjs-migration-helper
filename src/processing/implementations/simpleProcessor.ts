@@ -5,7 +5,7 @@ class SimpleProcessor extends FileProcessor {
     get type(): string {
         switch (this.metaData.fileType) {
             case 'service':
-                return this.metaData.partOfFocus ? 'S' : 's';
+                return this.metaData.inScope ? 'S' : 's';
             case 'controller':
                 return 'T';
             default:

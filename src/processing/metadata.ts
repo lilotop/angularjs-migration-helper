@@ -1,6 +1,6 @@
 type FileInfo = {
     filePath: string;
-    partOfFocus: boolean;
+    inScope: boolean;
 };
 
 type UiObjFileTypes = 'component' | 'directive';
